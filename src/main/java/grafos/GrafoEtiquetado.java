@@ -7,8 +7,8 @@ package grafos;
 import lineales.dinamicas.Cola;
 import lineales.dinamicas.Lista;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+//import java.util.LinkedHashMap;
+//import java.util.Map;
 
 public class GrafoEtiquetado {
 

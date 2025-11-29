@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+//import java.util.concurrent.Phaser;
+
 import lineales.dinamicas.Lista;
 
 /**
@@ -61,7 +63,7 @@ public class prueba {
                            4- ABM (Altas-Bajas-Modificaciones) de red de rieles 
                            5- consulta sobre trenes 
                            6- consulta sobre viajes 
-                           10- Finalizar""");
+                           7- Finalizar""");
         res = TecladoIn.readLineInt();
         return res;
     }
@@ -208,17 +210,17 @@ public class prueba {
     }
     public static void bajaEstacion() {
         Estacion estacion;
-        String nombre;
+        String nombre,text;
         do {
             System.out.println("Ingrese nombre de estacion a Eliminar");
             nombre = TecladoIn.readLine();
             estacion = (Estacion) avlEstaciones.obtenerDato(nombre);
         } while (estacion == null);// hasta encontrar la estacion
-
         grafoMapa.eliminarVertice(estacion);// elimina la estacion del mapa y sus ady
         eliminarEstacionDeLineasHash(estacion);//elimina la estacion de todas la lineas
         avlEstaciones.eliminar(nombre);// elimina la estacion
-        System.out.println("La estacion fue eliminada");
+        text="La estacion "+nombre+" fue eliminada";
+        modificarTxt(text);
     }
     private static void eliminarEstacionDeLineasHash(Estacion estacion){
         for (Map.Entry<String, Object> entry : hashLineas.entrySet()) { // Itera usando Map.Entry para recorrer todas las lineas del hash, y para cada una de sus listas buscar la estacion que se tiene que eliminar
@@ -280,13 +282,11 @@ public class prueba {
                 }
                 System.out.println("Desea realizar otra modificacion? si/no");
                 if("no".equals(TecladoIn.readLine())){
-                    i=6;
-                }else{
-                    if(i==6){ // esto es en caso de que "si" se quiera seguir modificando pero la ultima opcion que se ingreso haya sido 6
-                        i=0;
-                    }
+                    i=0;
                 }
-            }while (i != 6);
+            }while (i!=6 && i!=0);
+            String text="Se modifico la estacion:\n"+ aux.toString();
+            modificarTxt(text);
         } else {
             System.out.println("Estacion no existe");
         }
@@ -321,7 +321,7 @@ public class prueba {
         Tren nuevoTren;
         int codigo;
         boolean seguir=true;
-        String lineaAsignada;
+        String lineaAsignada,text;
         do {
             System.out.println("Ingrese codigo de Tren (si ingresa un codigo ya existente se le pedira que ingrese otro nuevamente)");
             codigo = TecladoIn.readLineInt();
@@ -343,18 +343,24 @@ public class prueba {
         }while(seguir);
         nuevoTren = new Tren(codigo, tipoPropulsion, cantVagonesPasageros, cantVagonesCarga, lineaAsignada); // se crea nuevo tren
         avlTrenes.insertar(nuevoTren, codigo);// se inserta el tren en el AVL
-        System.out.println("nuevo Tren ingresado");
+        text="nuevo Tren ingresado";
+        System.out.println(text);
+        modificarTxt(text);
+        modificarTxt(nuevoTren.toString());
     }
     public static void bajaTren() {
         Tren trenAux;
         int codigo;
+        String text;
         do {
             System.out.println("Ingrese codigo del tren a Eliminar");
             codigo = TecladoIn.readLineInt();
             trenAux = (Tren) avlTrenes.obtenerDato(codigo);
         } while (trenAux == null);// Repite hasta encontrar el tren
         avlTrenes.eliminar(codigo);// elimina el tren
-        System.out.println("El tren fue eliminado");
+        text="El tren "+codigo+" fue eliminado";
+        System.out.println(text);
+        modificarTxt(text);
     }
     private static void modificarTren() {
         int i;
@@ -400,13 +406,12 @@ public class prueba {
                 }
                 System.out.println("Desea realizar otra modificacion? si/no");
                 if("no".equals(TecladoIn.readLine())){
-                    i=5;
-                }else{
-                    if(i==5){ // esto es en caso de que "si" se quiera seguir modificando pero la ultima opcion que se ingreso haya sido 6
-                        i=0;
-                    }
+                    i=0;
                 }
-            }while (i != 5);
+            }while (i!=5 && i!=0);
+            String text="Se modifico el Tren:\n"+ aux.toString();
+            modificarTxt(text);
+
         } else {
             System.out.println("Tren no existe");
         }
@@ -442,6 +447,7 @@ public class prueba {
     }
     public static void altaNuevoRiel() {
         Estacion aux1, aux2;
+        String text;
         do {
             System.out.println("Ingrese nombre de la primera Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
             aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
@@ -453,10 +459,14 @@ public class prueba {
         System.out.println("Ingrese los Km del nuevo Riel");
         double riel = TecladoIn.readLineDouble();
         grafoMapa.insertarArco(aux1, aux2, riel);
-        System.out.println("nuevo riel ingresado");
+        text="nuevo Riel ingresado";
+        System.out.println(text);
+        modificarTxt(text);
+        modificarTxt(aux1.getNumero()+", "+riel+","+aux2.getNumero());
     }
     public static void bajaRiel() {
         Estacion aux1, aux2;
+        String text;
         do {
             System.out.println("Ingrese nombre de la primera Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
             aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
@@ -467,7 +477,9 @@ public class prueba {
         } while (aux2 == null);
         // se encontraron las dos estaciones
         grafoMapa.eliminarArco(aux1, aux2);
-        System.out.println("El riel fue eliminado");
+        text="El Riel entre "+aux1.getNumero()+" y "+aux2.getNumero()+" fue eliminado";
+        System.out.println(text);
+        modificarTxt(text);
     }
     public static void modificarRiel() {
         Estacion aux1, aux2;
@@ -485,6 +497,8 @@ public class prueba {
         double riel = TecladoIn.readLineDouble();
         grafoMapa.insertarArco(aux1, aux2, riel);
         System.out.println("El riel fue modificado");
+        String text="Se modifico el Riel entre"+aux1.getNumero()+" y "+aux2.getNumero();
+        modificarTxt(text);
     }
     //ABM Lineas
     private static void ABMLineas() {
@@ -512,7 +526,7 @@ public class prueba {
         } while (res != 4);
     }
     public static void altaNuevaLinea() {
-        String nombre, aux;
+        String nombre, aux, text;
         boolean seguir=true, existe=false;;
         Lista listaEstaciones = new Lista();
         do {
@@ -542,9 +556,13 @@ public class prueba {
             }
         }while(seguir && listaEstaciones.longitud() < 2);
         hashLineas.put(nombre, new Linea(nombre, listaEstaciones)); // crea y guarda la nueva linea en el hash
+        text="nueva Linea ingresada";
+        System.out.println(text);
+        modificarTxt(text);
+        modificarTxt(listaEstaciones.toString());
     }
     public static void bajaLinea(){
-        String nombre;
+        String nombre, text;
         boolean seguir=true;
         do {
             System.out.println("Ingrese nombre de la Linea a eliminar");
@@ -552,8 +570,9 @@ public class prueba {
             if(hashLineas.get(nombre)!=null){
                 hashLineas.remove(nombre); // elimina la linea del hash
                 seguir=false;
-                modificarTxt("La linea "+ nombre+" fue eliminada");
-                System.out.println("La Linea fue eliminada");
+                text="La linea "+nombre+" fue eliminada";
+                System.out.println(text);
+                modificarTxt(text);
             }else{
                 System.out.println(("La Linea no existe, ingrese otro nombre"));
             }
@@ -593,6 +612,8 @@ public class prueba {
                     if(seguir==true){
                         hashLineas.put(nombre, new Linea(nombre, listaEstaciones));// actualizo el nuevo recorrido de la linea
                         valido=true;
+                        String text="Se modifico la linea"+nombre+":\n"+ listaEstaciones.toString();
+                        modificarTxt(text);
                     }else{
                         System.out.println("el recorrido no es valido, ingrese otro por favor");
                 }
@@ -673,7 +694,7 @@ public class prueba {
                 default ->
                     System.out.println("Ingrese una opcion del 1 al 5");
             }
-        } while (res != 3);
+        } while (res != 5);
     }
     private static void existeCaminoConMaximoKm() {
         double x=0;

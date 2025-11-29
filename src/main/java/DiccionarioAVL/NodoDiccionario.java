@@ -1,13 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DiccionarioAVL;
 
 /**
@@ -18,7 +8,7 @@ public class NodoDiccionario {
 
     private int altura;
     private Object elem;
-    private Comparable clave;
+    private Comparable<?> clave;
     private NodoDiccionario izq;
     private NodoDiccionario der;
 

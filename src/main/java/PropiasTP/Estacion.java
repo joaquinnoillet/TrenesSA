@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package PropiasTP;
 
 /**
  *
  * @author JoaquinNoillet
  */
-public class Estacion implements Comparable {
+public class Estacion implements Comparable<Estacion> {
     private String nombre;
     private String calle;
     private int numero; //clave
@@ -96,11 +92,10 @@ public class Estacion implements Comparable {
         " ,cantVias: "+this.cantVias+
         " ,cantPlataformas: "+this.cantPlataformas+"\n";
     }
-    public int compareTo(Object o) {
-        Estacion c=(Estacion)o;
-        return this.nombre.compareTo(c.nombre);
+    public int compareTo(Estacion o) {
+        return Integer.compare(this.numero, o.numero);
     }
-    public boolean equals(Comparable o){
+    public boolean equals(Comparable<?> o){
         Estacion c =(Estacion)o;
         return (this.nombre.equals(c.nombre) && this.numero==c.numero);
     }
