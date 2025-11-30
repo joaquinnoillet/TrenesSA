@@ -30,6 +30,7 @@ public class prueba {
 
     public static void main(String[] args) throws FileNotFoundException {
         int i;
+        limpiarArchivoLog();
         altaDatos();
         do {
             i = menuPrincipal();
@@ -67,6 +68,16 @@ public class prueba {
         res = TecladoIn.readLineInt();
         return res;
     }
+    public static void limpiarArchivoLog(){
+        try {
+            FileWriter archivo = new FileWriter(txtCambios,false);
+            archivo.write("");
+            archivo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
     public static void modificarTxt(String cadena) {
         try {
             FileWriter escribirArchivo = new FileWriter(txtCambios,true);
@@ -74,8 +85,8 @@ public class prueba {
             buffer.write(cadena);
             buffer.newLine();
             buffer.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//check
 
@@ -651,11 +662,11 @@ public class prueba {
         System.out.println(trenAux.toString());
     }//check
     public static void verificarTrenLinea() {
-        int cod;
+        String cod;
         Tren trenAux;
         do {
             System.out.println("Ingrese Codigo del Tren (si el codigo no existe o es incorrecto se le pedira que lo ingrese nuevamente");
-            cod = TecladoIn.readLineInt();
+            cod = TecladoIn.readLine();
             trenAux = (Tren) avlTrenes.obtenerDato(cod);
         } while (trenAux == null);
 
@@ -667,6 +678,42 @@ public class prueba {
         } else {
             System.out.println("el tren no tiene una linea asignada");
         }
+    }
+    //SUBMENU Estaciones
+        private static void SubMenuEstaciones() {
+        int res;
+        do {
+            System.out.println("""
+                           Sub Menu de opciones de Estacioes :  
+                           1- mostrar toda la información de Estacion 
+                           2- verificar si está destinado a alguna línea 
+                           3- Terminar""");
+            res = TecladoIn.readLineInt();
+            switch (res) {
+                case 1 ->
+                    mostrarInfoEstacion();
+                case 2 ->
+                    estacionesComienzanConSubcadena();
+                case 3 ->
+                    System.out.println("Fin sub menu trenes");
+                default ->
+                    System.out.println("Ingrese una opcion del 1 al 3");
+            }
+        } while (res != 3);
+    }
+    public static void mostrarInfoEstacion(){
+        Estacion estacionAux;
+        do {
+            System.out.println("Ingrese nombre de la Estacion (si no existe o el nombre es incorrecto se le pedira que lo ingrese nuevamente)");
+            estacionAux=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
+        } while (estacionAux==null);
+        System.out.println(estacionAux.toString());
+    }
+
+    public static void estacionesComienzanConSubcadena(){
+        String subcadena;
+        System.out.println("Ingrese subcadena");
+        subcadena=TecladoIn.readLine();
     }
     //SUBMENU Viajes
     private static void SubMenuViajes() {

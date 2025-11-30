@@ -9,14 +9,3 @@ R;Retiro;Mar del Plata;200
 T;234;diesel;5;6;Mitre
 T;6789;eléctrico;10;1;Roca
 T;893;gasolina;0;11;no-asignado
-E;Retiro;Av. Dr. José María Ramos Mejía;1430;CABA;1104;9;6
-E;Córdoba;Boulevard Juan Domingo Perón;101;Córdoba;5000;6;4
-E;Mar del Plata;San Juan;1642;Mar del Plata;7600;5;4
-L;Mitre;Retiro;Córdoba
-L;Roca;Retiro;Córdoba;Mar del Plata
-R;Retiro;Córdoba;80
-R;Córdoba;Mar del Plata;40
-R;Retiro;Mar del Plata;200
-T;234;diesel;5;6;Mitre
-T;6789;eléctrico;10;1;Roca
-T;893;gasolina;0;11;no-asignado
