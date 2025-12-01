@@ -39,6 +39,7 @@ R;Morón;Merlo;5.1
 R;Merlo;San Martín;9.3
 R;San Martín;Vicente López;14.6
 R;Vicente López;Olivos;2.1
+R;Olivos;Vicente López;2.1
 R;Olivos;Martínez;3.4
 R;Martínez;San Isidro;2.8
 R;San Isidro;Acassuso;1.9
@@ -53,7 +54,6 @@ R;Constitución;San Justo;15.9
 R;Quilmes;Lomas de Zamora;6.4
 R;Banfield;San Justo;8.2
 R;Morón;San Justo;5.6
-R;Merlo;San Justo;4.3
 R;Vicente López;Retiro;10.2
 R;San Isidro;Retiro;18.7
 
