@@ -12,8 +12,8 @@ public class NodoDiccionario {
     private NodoDiccionario izq;
     private NodoDiccionario der;
 
-    public NodoDiccionario(Object elto, Comparable clave, NodoDiccionario nodoIzq, NodoDiccionario nodoDer) {
-        this.elem = elto;
+    public NodoDiccionario(Object elem, Comparable clave, NodoDiccionario nodoIzq, NodoDiccionario nodoDer) {
+        this.elem = elem;
         this.clave = clave;
         this.izq = nodoIzq;
         this.der = nodoDer;

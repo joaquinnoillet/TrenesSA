@@ -47,12 +47,14 @@ public class prueba {
                     SubMenuTrenes();
                 case 6 ->
                     SubMenuViajes();
-                case 7 ->
+                case  7 ->
+                    SubMenuEstaciones();
+                case 8 ->
                     System.out.println("finalizando ejecucion...");
                 default ->
                     System.out.println("ingresar opcion del 1 al 7");
             }
-        } while (i != 7);
+        } while (i != 8);
     }
     public static int menuPrincipal() {
         int res;
@@ -63,8 +65,9 @@ public class prueba {
                            3- ABM (Altas-Bajas-Modificaciones) de lineas
                            4- ABM (Altas-Bajas-Modificaciones) de red de rieles 
                            5- consulta sobre trenes 
-                           6- consulta sobre viajes 
-                           7- Finalizar""");
+                           6- consulta sobre viajes
+                           7- consulta sobre estaciones
+                           8- Finalizar""");
         res = TecladoIn.readLineInt();
         return res;
     }
@@ -680,13 +683,13 @@ public class prueba {
         }
     }
     //SUBMENU Estaciones
-        private static void SubMenuEstaciones() {
+    private static void SubMenuEstaciones() {
         int res;
         do {
             System.out.println("""
                            Sub Menu de opciones de Estacioes :  
                            1- mostrar toda la información de Estacion 
-                           2- verificar si está destinado a alguna línea 
+                           2- listar todas las estaciones que comienzan con una subcadena 
                            3- Terminar""");
             res = TecladoIn.readLineInt();
             switch (res) {
@@ -714,6 +717,8 @@ public class prueba {
         String subcadena;
         System.out.println("Ingrese subcadena");
         subcadena=TecladoIn.readLine();
+        Lista aux=avlEstaciones.listarClavesPorPrefijo(subcadena);
+        System.out.println(aux.toString());
     }
     //SUBMENU Viajes
     private static void SubMenuViajes() {

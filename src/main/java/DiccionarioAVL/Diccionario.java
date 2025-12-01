@@ -295,10 +295,26 @@ public class Diccionario {
     private void listarClavesAux(NodoDiccionario n, Lista claves) {
         //recorrido inorden muestra ordenadamente el arbol
         if (n != null) {
-            System.out.println(n.getClave());
             listarClavesAux(n.getIzq(), claves);
             claves.insertar(n.getClave(), claves.longitud() + 1);
             listarClavesAux(n.getDer(), claves);
+        }
+    }
+
+        public Lista listarClavesPorPrefijo(Comparable prefijo) {
+        Lista clavesConPrefijo = new Lista();
+        listarClavesPorPrefijoAux(this.raiz, prefijo, clavesConPrefijo);
+        return clavesConPrefijo;
+    }
+
+    private void listarClavesPorPrefijoAux(NodoDiccionario n,Comparable prefijo, Lista claves) {
+        //
+        if (n != null) {
+            listarClavesPorPrefijoAux(n.getIzq(), prefijo, claves);
+            if (((String) n.getClave()).toLowerCase().startsWith(((String) prefijo).toLowerCase())) {
+                claves.insertar(n.getClave(), claves.longitud() + 1);
+            }
+            listarClavesPorPrefijoAux(n.getDer(), prefijo, claves);
         }
     }
 
