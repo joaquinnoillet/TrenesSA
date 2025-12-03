@@ -36,7 +36,7 @@ public class prueba {
             i = menuPrincipal();
             switch (i) {
                 case 1 ->
-                    ABMEstaciones(); //check
+                    ABMEstaciones();
                 case 2 ->
                     ABMTrenes();
                 case 3 ->
@@ -712,7 +712,6 @@ public class prueba {
         } while (estacionAux==null);
         System.out.println(estacionAux.toString());
     }
-
     public static void estacionesComienzanConSubcadena(){
         String subcadena;
         System.out.println("Ingrese subcadena");

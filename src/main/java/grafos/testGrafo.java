@@ -1,6 +1,6 @@
 package grafos;
 
-import lineales.dinamicas.Lista;
+//import lineales.dinamicas.Lista;
 
 public class testGrafo {
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class testGrafo {
         prueba.insertarVertice("E");
         prueba.insertarVertice("F");
         prueba.insertarVertice("G");
-        prueba.insertarVertice("H");
+
 
         prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("B"), 100);
         prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("D"), 50);
@@ -40,8 +40,6 @@ public class testGrafo {
         prueba.insertarArco(prueba.recuperarVertice("D"),prueba.recuperarVertice("E"), 85);
         prueba.insertarArco(prueba.recuperarVertice("C"),prueba.recuperarVertice("F"), 40);
         prueba.insertarArco(prueba.recuperarVertice("G"),prueba.recuperarVertice("D"), 40);
-        prueba.insertarArco(prueba.recuperarVertice("B"),prueba.recuperarVertice("H"), 40);
-        prueba.insertarArco(prueba.recuperarVertice("H"),prueba.recuperarVertice("G"), 40);
         
         System.err.println(prueba.toString());
 

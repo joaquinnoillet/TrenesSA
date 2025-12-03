@@ -1,29 +1,29 @@
-E;1;Retiro;Av. Dr. José María Ramos Mejía;1430;CABA;C1104;9;6
-E;2;Once;Av. Pueyrredón;420;CABA;C1118;12;8
-E;3;Constitución;Av. Brasil;1100;CABA;C1154;15;10
-E;4;Tigre;Av. Cazón;1400;Tigre;B1648;8;5
-E;5;Luján;Av. Ramón Castillo;250;Luján;B6700;6;4
-E;6;Morón;Av. Bartolomé Mitre;1800;Morón;B1708;7;5
-E;7;Quilmes;Av. Lafuente;350;Quilmes;B1878;9;6
-E;8;Banfield;Av. Maipú;1200;Lomas de Zamora;B1828;5;3
-E;9;San Justo;Av. Juan Manuel de Rosas;2300;La Matanza;B1754;8;5
-E;10;Merlo;Av. del Libertador;1500;Merlo;B1722;6;4
-E;11;Temperley;Av. Vergara;800;Lomas de Zamora;B1834;7;4
-E;12;Adrogué;Av. Espora;600;Almirante Brown;B1846;5;3
-E;13;San Martín;Av. Ballivián;1100;San Martín;B1650;10;7
-E;14;Vicente López;Av. Maipú;2600;Vicente López;B1638;4;2
-E;15;Olivos;Av. Maipú;2890;Vicente López;B1636;5;3
-E;16;Martínez;Av. del Libertador;3200;San Isidro;B1640;6;4
-E;17;San Isidro;Av. del Libertador;4100;San Isidro;B1642;8;5
-E;18;Acassuso;Av. del Libertador;4800;San Isidro;B1641;4;2
-E;19;Carapachay;Av. del Libertador;5200;Vicente López;B1605;3;2
-E;20;Florida;Av. San Martín;2400;Vicente López;B1602;5;3
-L;Mitre;Tigre;San Fernando;Olivos;Vicente Lopez;Retiro;Once;Contitucion
-L;Sarmiento;Olivos;Martínes;San Isidro;Acussoso;Carapachay;Florida;Quilmes
-L;Alberdi;Constitución;Quilmes;Banfield;Temperley;Adrogué;Lomas de Zamora;San Justo
-L;Belgrano Norte;San Justo;Moron;Merlo;San Martín;Roca
-L;Urquiza;Roca;Olivos;Martínez;San Isidro;Acassuso;Carapachay;Florida;Tigre
-L;San Jose;Retiro;San Martín;Roca;Olivos
+E;Retiro;Av. Dr. José María Ramos Mejía;1430;CABA;1104;9;6
+E;Once;Av. Pueyrredón;420;CABA;1118;12;8
+E;Constitución;Av. Brasil;1100;CABA;1154;15;10
+E;Tigre;Av. Cazón;1400;Tigre;1648;8;5
+E;Luján;Av. Ramón Castillo;250;Luján;6700;6;4
+E;Morón;Av. Bartolomé Mitre;1800;Morón;1708;7;5
+E;Quilmes;Av. Lafuente;350;Quilmes;1878;9;6
+E;Banfield;Av. Maipú;1200;Lomas de Zamora;1828;5;3
+E;San Justo;Av. Juan Manuel de Rosas;2300;La Matanza;1754;8;5
+E;Merlo;Av. del Libertador;1500;Merlo;1722;6;4
+E;Temperley;Av. Vergara;800;Lomas de Zamora;1834;7;4
+E;Adrogué;Av. Espora;600;Almirante Brown;1846;5;3
+E;San Martín;Av. Ballivián;1100;San Martín;1650;10;7
+E;Vicente López;Av. Maipú;2600;Vicente López;1638;4;2
+E;Olivos;Av. Maipú;2890;Vicente López;1636;5;3
+E;Martínez;Av. del Libertador;3200;San Isidro;1640;6;4
+E;San Isidro;Av. del Libertador;4100;San Isidro;1642;8;5
+E;Acassuso;Av. del Libertador;4800;San Isidro;1641;4;2
+E;Carapachay;Av. del Libertador;5200;Vicente López;1605;3;2
+E;Florida;Av. San Martín;2400;Vicente López;1602;5;3
+L;Mitre;Retiro;Vicente López;Olivos;Martínez;San Isidro;Acassuso;Carapachay;Florida;Tigre
+L;Sarmiento;Retiro;Once;San Justo;Morón;Merlo;San Martín
+L;Roca;Constitución;Quilmes;Banfield;Temperley;Adrogué;Lomas de Zamora
+L;Belgrano Norte;Retiro;Vicente López;Olivos;San Fernando;Tigre
+L;Urquiza;San Martín;Merlo;Morón;San Justo;Lomas de Zamora;Adrogué
+L;San Martín;Retiro;San Martín;Merlo;San Justo;Constitución
 R;Retiro;Once;3.2
 R;Once;Constitución;4.1
 R;Constitución;Quilmes;18.5
@@ -35,8 +35,8 @@ R;Lomas de Zamora;San Justo;12.2
 R;San Justo;Morón;7.4
 R;Morón;Merlo;5.1
 R;Merlo;San Martín;9.3
-R;San Martín;Roca;14.6
-R;Martínez;Temperley;18.1
+R;San Martín;Vicente López;14.6
+R;Vicente López;Olivos;2.1
 R;Olivos;Vicente López;2.1
 R;Olivos;Martínez;3.4
 R;Martínez;San Isidro;2.8
@@ -46,29 +46,29 @@ R;Carapachay;Florida;1.7
 R;Florida;Tigre;8.5
 R;Tigre;San Fernando;6.2
 R;San Fernando;Olivos;7.8
-R;Retiro;Tigre;8.3
-R;Retiro;San Martín;22.7
+R;Retiro;Tigre;28.3
+R;Retiro;San Martín;12.7
 R;Constitución;San Justo;15.9
 R;Quilmes;Lomas de Zamora;6.4
-R;Roca;Adrogué;9.6
-R;Roca;Retiro;10.2
-R;San Isidro;Retiro;8.7
-R;Roca,Olivos;30.5
+R;Banfield;San Justo;8.2
+R;Morón;San Justo;5.6
+R;Vicente López;Retiro;10.2
+R;San Isidro;Retiro;18.7
 T;1001;eléctrico;8;0;Mitre
 T;1002;eléctrico;10;0;Sarmiento
-T;1003;diesel;6;4;Alberdi
+T;1003;diesel;6;4;Roca
 T;1004;eléctrico;12;0;Belgrano Norte
 T;1005;gasolina;4;8;Urquiza
-T;1006;eléctrico;9;0;San Jose
+T;1006;eléctrico;9;0;San Martín
 T;1007;diesel;7;3;Mitre
 T;1008;eléctrico;11;0;Sarmiento
-T;1009;diesel;5;6;Alberdi
+T;1009;diesel;5;6;Roca
 T;1010;eléctrico;10;0;Belgrano Norte
 T;1011;gasolina;3;9;Urquiza
-T;1012;eléctrico;8;0;San Jose
+T;1012;eléctrico;8;0;San Martín
 T;1013;diesel;0;15;no-asignado
 T;1014;eléctrico;6;0;Mitre
-T;1015;diesel;4;7;Alberdi
+T;1015;diesel;4;7;Roca
 T;1016;gasolina;0;12;no-asignado
 T;1017;eléctrico;7;0;Sarmiento
 T;1018;diesel;8;2;Urquiza
