@@ -4,7 +4,7 @@ package PropiasTP;
  *
  * @author JoaquinNoillet
  */
-public class Tren implements Comparable<Tren>{
+public class Tren {
     
     private int codigo;
     private String tipoPropulsion;
@@ -62,7 +62,6 @@ public class Tren implements Comparable<Tren>{
         return this.codigo == aux.codigo;
     }
 
-    @Override
     public int compareTo(Tren t) {
         return Integer.compare(this.codigo, t.codigo);
     }

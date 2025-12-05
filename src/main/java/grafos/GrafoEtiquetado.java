@@ -7,8 +7,6 @@ package grafos;
 import lineales.dinamicas.Cola;
 import lineales.dinamicas.Lista;
 import java.util.HashMap;
-//import java.util.LinkedHashMap;
-//import java.util.Map;
 
 public class GrafoEtiquetado {
 
@@ -18,25 +16,25 @@ public class GrafoEtiquetado {
         this.inicio = null;
     }
 
-    public boolean insertarVertice(Object element) {//Nodo nuevo
-        boolean retorno = true;
+    public boolean insertarVertice(Object element) {//Nodo nuevo/Se soluciono el problema de insercion
+        boolean res=true;
         NodoVerticeEtiquetado nodo = this.inicio;
-        if (nodo == null) {
+        NodoVerticeEtiquetado nodoAnterior=null;
+        if (nodo==null) {// si es el primer nodo a insertar
             this.inicio = new NodoVerticeEtiquetado(element, null, null);
-            retorno = true;
         } else {
-            while (retorno && nodo.getSigVertice() != null) {
-                if (nodo.getElemento().equals(element)) {
-                    retorno = false;
+            while (res && nodo!=null) {// recorre hasta llegar al final o si esta repetido
+                if (nodo.getElemento().equals(element)) {// si esta repetido
+                    res=false;
                 }
-                nodo = nodo.getSigVertice();
+                nodoAnterior=nodo;
+                nodo=nodo.getSigVertice();
             }
-            if (retorno) { // si es true
-                nodo.setSigVertice(new NodoVerticeEtiquetado(element, null, null)); //se agrega nuevo nodo vertice
-                retorno = true;
+            if (res) { // si no esta repetido
+                nodoAnterior.setSigVertice(new NodoVerticeEtiquetado(element, null, null)); //se agrega nuevo nodo vertice
             }
         }
-        return retorno;
+        return res;
     }//check
 
     private boolean insertarAdyacente(NodoVerticeEtiquetado nodo, NodoVerticeEtiquetado Nodoadyacente, double etiqueta) {
