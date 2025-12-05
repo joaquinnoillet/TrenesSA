@@ -1,6 +1,6 @@
 package grafos;
 
-import lineales.dinamicas.Lista;
+//import lineales.dinamicas.Lista;
 
 public class testGrafo {
     public static void main(String[] args) {
@@ -24,24 +24,24 @@ public class testGrafo {
         System.out.println(prueba.insertarArco(prueba.recuperarVertice("brasil"),prueba.recuperarVertice("senegal"), 40));
         
          */
-        System.out.println(prueba.insertarVertice("A"));
-        System.out.println(prueba.insertarVertice("B"));
-        System.out.println(prueba.insertarVertice("C"));
-        System.out.println(prueba.insertarVertice("D"));
-        System.out.println(prueba.insertarVertice("E"));
-        System.out.println(prueba.insertarVertice("F"));
-        System.out.println(prueba.insertarVertice("G"));
-        System.out.println(prueba.insertarVertice("H"));
-        System.out.println(prueba.insertarVertice("H"));
+        prueba.insertarVertice("A");
+        prueba.insertarVertice("B");
+        prueba.insertarVertice("C");
+        prueba.insertarVertice("D");
+        prueba.insertarVertice("E");
+        prueba.insertarVertice("F");
+        prueba.insertarVertice("G");
+        prueba.insertarVertice("B");
 
+        prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("B"), 100);
+        prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("D"), 50);
+        prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("F"), 80);
+        prueba.insertarArco(prueba.recuperarVertice("C"),prueba.recuperarVertice("B"), 90);
+        prueba.insertarArco(prueba.recuperarVertice("D"),prueba.recuperarVertice("E"), 85);
+        prueba.insertarArco(prueba.recuperarVertice("C"),prueba.recuperarVertice("F"), 40);
+        prueba.insertarArco(prueba.recuperarVertice("G"),prueba.recuperarVertice("D"), 40);
+        
         prueba.insertarArco("A","B", 100);
-        prueba.insertarArco("A","D", 50);
-        prueba.insertarArco("A","F", 80);
-        prueba.insertarArco("C","B", 90);
-        prueba.insertarArco("D","E", 85);
-        prueba.insertarArco("C","F", 40);
-        prueba.insertarArco("G","D", 40);
-
         
         System.err.println(prueba.toString());
 
