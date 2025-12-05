@@ -31,7 +31,7 @@ public class testGrafo {
         prueba.insertarVertice("E");
         prueba.insertarVertice("F");
         prueba.insertarVertice("G");
-
+        prueba.insertarVertice("B");
 
         prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("B"), 100);
         prueba.insertarArco(prueba.recuperarVertice("A"),prueba.recuperarVertice("D"), 50);
@@ -40,6 +40,8 @@ public class testGrafo {
         prueba.insertarArco(prueba.recuperarVertice("D"),prueba.recuperarVertice("E"), 85);
         prueba.insertarArco(prueba.recuperarVertice("C"),prueba.recuperarVertice("F"), 40);
         prueba.insertarArco(prueba.recuperarVertice("G"),prueba.recuperarVertice("D"), 40);
+        
+        prueba.insertarArco("A","B", 100);
         
         System.err.println(prueba.toString());
 

@@ -25,6 +25,8 @@ public class Diccionario {
             ver = insertarRec(this.raiz, nuevo);
             this.raiz = this.rebalancear(this.raiz);
         }
+        System.out.println("va a insertar: "+clave);
+        System.out.println(this.toString()+"/n+ ------");
         return ver;
     }
 
@@ -105,7 +107,7 @@ public class Diccionario {
                     exito = true;
                     if (der.esHoja()) {
                         raizRec.setDer(null);
-                    } else if (der.getDer() != null) {
+                    } else if (der.getDer() != null) {// mala implanatecion, se debe usar el hijo izq, no usar marRec, set toma al hijo y toma el lugar del padre
                         aux = this.minRec(der.getDer());
                         elemAux = aux.getElem();
                         claveAux = aux.getClave();
@@ -186,6 +188,7 @@ public class Diccionario {
 
     private NodoDiccionario rotSimpleDer(NodoDiccionario raizRec) {
         //Solo se puede aplicar si el nodo pasado por parametro tiene un HI
+        System.out.println("realiza rotacion simple a Derecha con pivote: "+ raizRec.getClave());
         NodoDiccionario nuevaRaiz = new NodoDiccionario(raizRec.getIzq().getElem(), raizRec.getIzq().getClave(), raizRec.getIzq().getIzq(), raizRec);
         raizRec.setIzq(raizRec.getIzq().getDer());
         if (nuevaRaiz.getIzq() != null) {
@@ -201,6 +204,7 @@ public class Diccionario {
 
     private NodoDiccionario rotSimpleIzq(NodoDiccionario raizRec) {
         //Solo se puede aplicar si [raizRec] tiene un hijo derecho
+        System.out.println("realiza rotacion simple a Izquierda con pivote: "+ raizRec.getClave());
         NodoDiccionario nuevaRaiz = new NodoDiccionario(raizRec.getDer().getElem(), raizRec.getDer().getClave(), raizRec, raizRec.getDer().getDer());
         raizRec.setDer(raizRec.getDer().getIzq());
         if (nuevaRaiz.getIzq() != null) {
@@ -216,12 +220,14 @@ public class Diccionario {
 
     private NodoDiccionario rotDobleDer(NodoDiccionario raizRec) {
         //Solo se puede aplicar si [raizRec] tiene un hijo izquierdo que tenga un hijo derecho
+        System.out.println("realiza rotacion Doble a Derecha con pivote: "+ raizRec.getClave());
         raizRec.setIzq(this.rotSimpleIzq(raizRec.getIzq()));
         raizRec = this.rotSimpleDer(raizRec);
         return raizRec;
     }
 
     private NodoDiccionario rotDobleIzq(NodoDiccionario raizRec) {
+        System.out.println("realiza rotacion Doble a Derecha con pivote: "+ raizRec.getClave());
         //Solo se puede aplicar si [raizRec] tiene un hijo derecho que tenga un hijo izquierdo
         raizRec.setDer(this.rotSimpleDer(raizRec.getDer()));
         raizRec = this.rotSimpleIzq(raizRec);
@@ -370,14 +376,14 @@ public class Diccionario {
         return s;
     }
     private String stringAux(NodoDiccionario n) {
-        String s = "["+ n.getAltura()+"] " + n.getElem();
+        String s = "["+ n.getAltura()+"] " + n.getClave();
         if (n.getIzq() != null) {
-            s = s + " - HI: " + n.getIzq().getElem();
+            s = s + " - HI: " + n.getIzq().getClave();
         } else {
             s = s + " - HI: #";
         }
         if (n.getDer() != null) {
-            s = s + " - HD: " + n.getDer().getElem() + "\n";
+            s = s + " - HD: " + n.getDer().getClave() + "\n";
         } else {
             s = s + " - HD: #" + "\n";
         }

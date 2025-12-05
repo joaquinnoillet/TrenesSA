@@ -10,8 +10,6 @@ import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-//import java.util.concurrent.Phaser;
-
 import lineales.dinamicas.Lista;
 
 /**
@@ -24,7 +22,6 @@ public class prueba {
     private static Diccionario avlEstaciones = new Diccionario();
     private static Diccionario avlTrenes = new Diccionario();
     private static HashMap<String, Object> hashLineas = new HashMap<>();
-
     private static File txtCambios = new File("src/main/java/Datos/archivoLOG.txt");
     private static File txtDatos = new File("src/main/java/Datos/Datos.txt");
 
@@ -92,7 +89,6 @@ public class prueba {
             e.printStackTrace();
         }
     }//check
-
     //ALTA
     public static void altaDatos() throws FileNotFoundException {
         Scanner sc = new Scanner(txtDatos);
@@ -464,11 +460,13 @@ public class prueba {
         String text;
         do {
             System.out.println("Ingrese nombre de la primera Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux1=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux1 == null); //repite hasta encontrar la estacion
         do {
             System.out.println("Ingrese nombre de la segunda Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux2=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux2 == null); //repite hasta encontrar la estacion
         System.out.println("Ingrese los Km del nuevo Riel");
         double riel = TecladoIn.readLineDouble();
@@ -592,7 +590,7 @@ public class prueba {
             }
         }while(seguir);
     }
-    public static void modificarLinea(){//testear
+    public static void modificarLinea(){
         String nombre;
         boolean seguir=true, valido=false;
         Estacion aux1,aux2;

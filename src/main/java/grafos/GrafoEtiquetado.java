@@ -18,21 +18,24 @@ public class GrafoEtiquetado {
         this.inicio = null;
     }
 
-    public boolean insertarVertice(Object element) {//Nodo nuevo
+    public boolean insertarVertice(Object element) {//
         boolean retorno = true;
         NodoVerticeEtiquetado nodo = this.inicio;
         if (nodo == null) {
             this.inicio = new NodoVerticeEtiquetado(element, null, null);
             retorno = true;
         } else {
-            while (retorno && nodo.getSigVertice() != null) {
+            NodoVerticeEtiquetado nodoAnterior=null;
+            while (retorno && nodo != null) {
+
                 if (nodo.getElemento().equals(element)) {
                     retorno = false;
                 }
+                nodoAnterior=nodo;
                 nodo = nodo.getSigVertice();
             }
             if (retorno) { // si es true
-                nodo.setSigVertice(new NodoVerticeEtiquetado(element, null, null)); //se agrega nuevo nodo vertice
+                nodoAnterior.setSigVertice(new NodoVerticeEtiquetado(element, null, null)); //se agrega nuevo nodo vertice
                 retorno = true;
             }
         }
