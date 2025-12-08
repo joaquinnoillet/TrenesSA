@@ -37,9 +37,9 @@ public class prueba {
                 case 2 ->
                     ABMTrenes();
                 case 3 ->
-                    ABMRieles();
-                case 4 ->
                     ABMLineas();
+                case 4 ->
+                    ABMRieles();
                 case 5 ->
                     SubMenuTrenes();
                 case 6 ->
@@ -49,7 +49,7 @@ public class prueba {
                 case 8 ->
                     System.out.println("finalizando ejecucion...");
                 default ->
-                    System.out.println("ingresar opcion del 1 al 7");
+                    System.out.println("ingresar opcion del 1 al 8");
             }
         } while (i != 8);
     }
@@ -481,11 +481,13 @@ public class prueba {
         String text;
         do {
             System.out.println("Ingrese nombre de la primera Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux1=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux1 == null);
         do {
             System.out.println("Ingrese nombre de la segunda Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux2=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux2 == null);
         // se encontraron las dos estaciones
         grafoMapa.eliminarArco(aux1, aux2);
@@ -497,11 +499,13 @@ public class prueba {
         Estacion aux1, aux2;
         do {
             System.out.println("Ingrese nombre de la primera Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux1=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux1=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux1 == null);
         do {
             System.out.println("Ingrese nombre de la segunda Estacion (si no existe se le pedira que ingrese otro nombre nuevamente)");
-            aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            //aux2=(Estacion) grafoMapa.recuperarVertice(TecladoIn.readLine());
+            aux2=(Estacion) avlEstaciones.obtenerDato(TecladoIn.readLine());
         } while (aux2 == null);
         // se encontraron las dos estaciones
         grafoMapa.eliminarArco(aux1, aux2);
@@ -768,7 +772,7 @@ public class prueba {
         est1=estaciones[0];
         est2=estaciones[1];
         Lista aux = grafoMapa.caminoMasCorto(est1, est2);
-        System.out.println("el camino mas corto entre " + est1.getNombre() + "y " + est2.getNombre() + " es: ");
+        System.out.println("el camino mas corto entre " + est1.getNombre() + " y " + est2.getNombre() + " es: ");
         System.out.println(aux.toString());
     }
     public static void caminoDeAaBMenosKm() {

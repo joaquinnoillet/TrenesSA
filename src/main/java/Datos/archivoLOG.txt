@@ -74,3 +74,5 @@ T;1017;eléctrico;7;0;Sarmiento
 T;1018;diesel;8;2;Urquiza
 T;1019;eléctrico;9;0;Belgrano Norte
 T;1020;diesel;0;10;no-asignado
+nuevo Riel ingresado
+1430, 20.0,2400

@@ -4,7 +4,7 @@ package PropiasTP;
  *
  * @author JoaquinNoillet
  */
-public class Estacion implements Comparable<Estacion> {// Comparable revisar
+public class Estacion {// Comparable revisar
     private String nombre;
     private String calle;
     private int numero; //clave

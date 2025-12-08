@@ -14,7 +14,6 @@ public class Diccionario {
     public Diccionario() {
         raiz = null;
     }
-
     public boolean insertar(Object elemento, Comparable clave) {
         //Inserta un elemento y lo acomoda en el arbol lexicograficamente
         NodoDiccionario nuevo = new NodoDiccionario(elemento, clave);
@@ -27,11 +26,10 @@ public class Diccionario {
         }
         return res;
     }
-
     private boolean insertarRec(NodoDiccionario nodo, NodoDiccionario elemento) {
         boolean res = false;
         if (nodo != null) {
-            if (nodo.getClave().compareTo(elemento.getClave()) > 0) { //si nodo (en el que estoy parado) es MAYOR que elemento.getClave()
+            if (nodo.getClave().compareTo(elemento.getClave()) > 0) { //si nodo es MAYOR que elemento.getClave() voy por Izq
                 if (nodo.getIzq() == null) { //si su hijo Izq es null
                     nodo.setIzq(elemento);
                     res = true;
@@ -39,7 +37,7 @@ public class Diccionario {
                     res = insertarRec(nodo.getIzq(), elemento);
                     nodo.setIzq(this.rebalancear(nodo.getIzq())); // cunado vuelve del retono valancea
                 }
-            } else if (nodo.getClave().compareTo(elemento.getClave()) < 0) { //si nodo (en el que estoy parado) es MENOR que elemento.getClave()
+            } else if (nodo.getClave().compareTo(elemento.getClave()) < 0) { //si nodo es MENOR que elemento.getClave() voy por Der
                 if (nodo.getDer() == null) { //si su hijo Derecho es null
                     nodo.setDer(elemento);
                     res = true;
@@ -52,192 +50,115 @@ public class Diccionario {
         }
         return res;
     }
-
-    public boolean eliminar2(Comparable clave) {
-        boolean exito = false;
-        if (!this.esVacio()) {
-            if (this.raiz.getClave().equals(clave)) { // caso a eliminar sea la raiz
-                exito = true;
-                if (this.raiz.esHoja()) {
-                    this.raiz = null;
-                }
-            } else { // si el nodo a eliminar no es la Raiz
-                exito = this.elimRec(this.raiz, clave);
-                this.raiz = rebalancear(this.raiz);
-                this.raiz.recalcularAltura();
-            }
-        }
-        return exito;
-    }
-
-    private boolean elimRec2(NodoDiccionario nodoPadre, Comparable clave) {
-        NodoDiccionario nodoHijoIzq = nodoPadre.getIzq(), nodoHijoDer = nodoPadre.getDer();
-        boolean exito = false;
-        if (clave.compareTo(nodoPadre.getClave()) > 0) {//si nodo (en el que estoy parado) es MAYOR que elemento.getClave()
-            if (nodoHijoDer != null) { //pregunto si el nodo Derecho no es nulo antes de seguir
-                if (nodoHijoDer.getClave().equals(clave)) { //CASO SI derecho es el que se elimina
-                    exito = true;
-                    elimA(nodoPadre, nodoHijoDer, clave);
-                    } else {// si no es el que se elimina, sigo buscando recursivamente
-                        exito = elimRec(nodoHijoDer, clave);
-                        nodoPadre.setDer(rebalancear(nodoHijoDer));
-                    }
-                }
-            } else //si nodo (en el que estoy parado) ES MENOR que elemento.getClave()
-                if (nodoHijoIzq != null) { //pregunto si el nodo Izquierdo no es nulo antes de seguir
-                    if (nodoHijoDer.getClave().equals(clave)) { //CASO SI Izquierdo es el que se elimina
-                        exito = true;
-                        elimA(nodoPadre, nodoHijoIzq, clave);
-                    } else {// si no es el que se elimina, sigo buscando recursivamente
-                        exito = elimRec(nodoHijoIzq, clave);
-                        nodoPadre.setDer(rebalancear(nodoHijoIzq));
-                    }
-                }
-        return exito;
-    }
-
-    public void elimA(NodoDiccionario nodoPadre,NodoDiccionario nodoHijo, Comparable clave) {
-        NodoDiccionario nodoAux;
-        if (nodoHijo.esHoja()) { // si nodo a eliminar en hoja
-            nodoPadre.setDer(null);
-        } else if (nodoHijo.getDer() != null && nodoHijo.getIzq()== null) { // caso de 1 hijo derecho
-            nodoPadre.setDer(nodoHijo.getDer());
-        }else if (nodoHijo.getDer()==null && nodoHijo.getIzq()!= null) { // caso de 1 hijo izquierdo
-            nodoPadre.setDer(nodoHijo.getIzq());
-        }else{// caso de 2 hijos
-            nodoAux = this.minRec(nodoHijo.getDer());// obtengo el minimo del subarbol derecho
-            nodoHijo.setDer(null); // separo el nodo a eliminar de su subarbol derecho
-            nodoPadre.setDer(rebalancear(nodoAux)); // coloco el candidato como nuevo hijo derecho del nodo actual y rebalanceo
-            nodoPadre.recalcularAltura();
-        }
-    }
-
     public boolean eliminar(Comparable clave) {
-
-        boolean exito = false;
+        boolean res = false;
         if (!this.esVacio()) {
-            if (this.raiz.getClave().equals(clave)) {
-                exito = true;
-                if (this.raiz.esHoja()) {
-                    this.raiz = null;
-                } else {
-                    Object elemAux;
-                    Comparable claveAux;
-                    NodoDiccionario aux;
-                    if (this.raiz.getDer() != null) {
-                        aux = this.minRec(this.raiz.getDer());
-                        elemAux = aux.getElem();
-                        claveAux = aux.getClave();
-                        elimRec(this.raiz, aux.getClave());
-                        this.raiz.recalcularAltura();
-                        this.raiz.setElem(elemAux);
-                        this.raiz.setClave(claveAux);
-                        this.raiz = rebalancear(this.raiz);
-                    } else {
-                        aux = this.maxRec(this.raiz.getIzq());
-                        elemAux = aux.getElem();
-                        claveAux = aux.getClave();
-                        elimRec(this.raiz, aux.getClave());
-                        this.raiz.recalcularAltura();
-                        this.raiz.setElem(elemAux);
-                        this.raiz.setClave(claveAux);
-                        this.raiz = rebalancear(this.raiz);
-                    }
-                }
-            } else {
-                exito = this.elimRec(this.raiz, clave);
-                this.raiz = rebalancear(this.raiz);
-                this.raiz.recalcularAltura();
-            }
+            res = elimRec(this.raiz,this.raiz,clave);
+            this.raiz = this.rebalancear(this.raiz);
         }
-        return exito;
+        return res;
     }
     private boolean elimRec(NodoDiccionario nodo, Comparable clave) {
-        NodoDiccionario izq = nodo.getIzq(), der = nodo.getDer(), aux;
-        boolean exito = false;
-        Object elemAux;
-        Comparable claveAux;
-        if (clave.compareTo(nodo.getClave()) > 0) {//si nodo (en el que estoy parado) es MAYOR que elemento.getClave()
-            if (der != null) {
-                if (der.getClave().equals(clave)) {
-                    exito = true;
-                    if (der.esHoja()) {
-                        nodo.setDer(null);
-                    } else if (der.getDer() != null) { // caso de 
-                        aux = this.minRec(der.getDer());
-                        elemAux = aux.getElem();
-                        claveAux = aux.getClave();
-                        elimRec(der, aux.getClave());
-                        nodo.recalcularAltura();
-                        der.setElem(elemAux);
-                        der.setClave(claveAux);
-                        nodo.setDer(rebalancear(der));
-                    } else {
-                        aux = this.maxRec(der.getIzq());
-                        elemAux = aux.getElem();
-                        claveAux = aux.getClave();
-                        elimRec(der, aux.getClave());
-                        nodo.recalcularAltura();
-                        der.setElem(elemAux);
-                        der.setClave(claveAux);
-                        nodo.setDer(rebalancear(der));
-                    }
-                } else {
-                    exito = elimRec(der, clave);
-                    nodo.setDer(rebalancear(der));
+        boolean res = false;
+        if (nodo != null) {
+            if (nodo.getClave().compareTo(clave) > 0) { //si nodo es MAYOR que elemento.getClave() voy por Izq
+                res = elimRec(nodo.getIzq(), clave);
+                nodo.setIzq(this.rebalancear(nodo.getIzq())); // cunado vuelve del retono valancea
+            } else if (nodo.getClave().compareTo(clave) < 0) { //si nodo es MAYOR que elemento.getClave() voy por Der
+                res = elimRec(nodo.getDer(), clave);
+                nodo.setDer(this.rebalancear(nodo.getDer())); // cunado vuelve del retono valancea
+            } else { //nodo es igual a clave
+                System.out.println("se encontro el nodo ");               
+                if (nodo.esHoja()) { //caso 1: nodo es hoja
+                    System.out.println("AAAAA");
+                    nodo = null;
+                    System.out.println(nodo);
+                } else if (nodo.getIzq() == null) { //caso 2: nodo tiene solo hijo derecho
+                    nodo = nodo.getDer();
+                } else if (nodo.getDer() == null) { //caso 3: nodo tiene solo hijo izquierdo
+                    nodo = nodo.getIzq();
+                } else { //caso 4: nodo tiene dos hijos
+                    NodoDiccionario nodoCandidato = encontrarMinimo(nodo.getDer()); //busco el candidato nimino por Derecha
+                    System.out.println("nodo candidato: "+nodoCandidato.getElem());
+                    nodo.setElem(nodoCandidato.getElem());
+                    nodo.setClave(nodoCandidato.getClave());
+                    elimRec(nodo.getDer(), nodoCandidato.getClave()); //elimino el nodo candidato que aun esta en el fondo del arbol
+                    //nodo.recalcularAltura(); //recalculo altura antes de rebalancear (creo que esta de mas)
+                    nodo.setDer(this.rebalancear(nodo.getDer())); // cunado vuelve del retono valancea
                 }
+                res = true;
             }
-        } else if (izq != null) {
-            if (izq.getClave().equals(clave)) {
-                exito = true;
-                if (izq.esHoja()) {
-                    nodo.setIzq(null);
-                } else if (izq.getDer() != null) {
-                    aux = this.minRec(izq.getDer());
-                    elemAux = aux.getElem();
-                    claveAux = aux.getClave();
-                    elimRec(izq, aux.getClave());
-                    nodo.recalcularAltura();
-                    izq.setElem(elemAux);
-                    izq.setClave(claveAux);
-                    nodo.setIzq(rebalancear(izq));
-                } else {
-                    aux = this.maxRec(izq.getIzq());
-                    elemAux = aux.getElem();
-                    claveAux = aux.getClave();
-                    elimRec(izq, aux.getClave());
-                    nodo.recalcularAltura();
-                    izq.setElem(elemAux);
-                    izq.setClave(claveAux);
-                    nodo.setIzq(rebalancear(izq));
-                }
-            } else {
-                exito = elimRec(izq, clave);
-                nodo.setIzq(rebalancear(izq));
+            if (nodo!=null) {
+                nodo.recalcularAltura(); //recalculo altura cada vez que vuelvo de la recursividad
             }
         }
-        return exito;
+        return res;
     }
 
-    private NodoDiccionario rebalancear(NodoDiccionario raizRec) {
-        NodoDiccionario nodoRet = raizRec;
+    private boolean elimRec(NodoDiccionario nodoAnterior,NodoDiccionario nodo, Comparable clave) {
+        boolean res = false;
+        if (nodo != null) {
+            if (nodo.getClave().compareTo(clave) > 0) { //si nodo es MAYOR que elemento.getClave() voy por Izq
+                res = elimRec(nodo,nodo.getIzq(), clave);
+                nodoAnterior.setIzq(this.rebalancear(nodoAnterior.getIzq())); // cunado vuelve del retono valancea
+            } else if (nodo.getClave().compareTo(clave) < 0) { //si nodo es MAYOR que elemento.getClave() voy por Der
+                res = elimRec(nodo,nodo.getDer(), clave);
+                nodoAnterior.setDer(this.rebalancear(nodoAnterior.getDer())); // cunado vuelve del retono valancea
+            } else { //nodo es igual a clave
+                System.out.println("se encontro el nodo");               
+                if (nodo.esHoja()) {//caso 1: nodo es hoja
+                    if (nodoAnterior.getDer().getClave().compareTo(clave)==0) {
+                        nodoAnterior.setDer(null);
+                    } else {
+                        nodoAnterior.setIzq(null); 
+                    }
+                    //nodo = null;
+                } else if (nodo.getIzq() == null) { //caso 2: nodo tiene solo hijo derecho
+                    nodoAnterior.setDer(nodo.getDer());
+                    nodo.setDer(null);
+                } else if (nodo.getDer() == null) { //caso 3: nodo tiene solo hijo izquierdo
+                    nodoAnterior.setIzq(nodo.getIzq());;
+                    nodo.setIzq(null);
+                } else { //caso 4: nodo tiene dos hijos
+                    NodoDiccionario nodoCandidato = encontrarMinimo(nodo.getDer()); //busco el candidato nimino por Derecha
+                    System.out.println("nodo candidato: "+nodoCandidato.getElem());
+                    nodo.setElem(nodoCandidato.getElem());
+                    nodo.setClave(nodoCandidato.getClave());
+                    System.out.println(this.raiz.toString());
+                    elimRec(nodo,nodo.getDer(), nodoCandidato.getClave()); //elimino el nodo candidato que aun esta en el fondo del arbol
+                    nodo.recalcularAltura(); //recalculo altura antes de rebalancear (creo que esta de mas)
+                    nodo.setDer(this.rebalancear(nodo.getDer())); // cunado vuelve del retono valancea
+                }
+                res = true;
+            }
+            if (nodo!=null) {
+                nodo.recalcularAltura(); //recalculo altura cada vez que vuelvo de la recursividad
+            }
+        }
+        return res;
+    }
+
+    private NodoDiccionario rebalancear(NodoDiccionario nodo) {
+        NodoDiccionario nodoRet = nodo;
         int balance;
-        if (!raizRec.esHoja()) {
-            balance = raizRec.getBalance();
+        if(nodo!=null){
+        if (!nodo.esHoja()) {
+            balance = nodo.getBalance();
             if (balance < -1) {
-                if (raizRec.getDer().getBalance() <= 0) {
-                    nodoRet = this.rotSimpleIzq(raizRec);
+                if (nodo.getDer().getBalance() <= 0) {
+                    nodoRet = this.rotSimpleIzq(nodo);
                 } else {
-                    nodoRet = this.rotDobleIzq(raizRec);
+                    nodoRet = this.rotDobleIzq(nodo);
                 }
 
             } else if (balance > 1) {
-                if (raizRec.getIzq().getBalance() >= 0) {
-                    nodoRet = this.rotSimpleDer(raizRec);
+                if (nodo.getIzq().getBalance() >= 0) {
+                    nodoRet = this.rotSimpleDer(nodo);
                 } else {
-                    nodoRet = this.rotDobleDer(raizRec);
+                    nodoRet = this.rotDobleDer(nodo);
                 }
             }
+        }
         }
         return nodoRet;
     }
@@ -432,7 +353,7 @@ public class Diccionario {
         return s;
     }
     private String stringAux(NodoDiccionario n) {
-        String s = "["+ n.getAltura()+"] " + n.getClave();
+        String s = "[Altura: "+ n.getAltura()+"] " + n.getClave();
         if (n.getIzq() != null) {
             s = s + " - HI: " + n.getIzq().getClave();
         } else {
@@ -452,23 +373,23 @@ public class Diccionario {
         return s;
     }
 
-    private NodoDiccionario minRec(NodoDiccionario raizRec) {
+    private NodoDiccionario encontrarMinimo(NodoDiccionario raizRec) {
         NodoDiccionario aux;
         if (raizRec.getIzq() != null) {
-            aux = minRec(raizRec.getIzq());
+            aux = encontrarMinimo(raizRec.getIzq());
         } else {
             aux = raizRec;
         }
         return aux;
     }
 
-    private NodoDiccionario maxRec(NodoDiccionario raizRec) {
-        NodoDiccionario aux;
-        if (raizRec.getDer() != null) {
-            aux = maxRec(raizRec.getDer());
-        } else {
-            aux = raizRec;
-        }
-        return aux;
-    }
+    //private NodoDiccionario maxRec(NodoDiccionario raizRec) {
+    //    NodoDiccionario aux;
+    //    if (raizRec.getDer() != null) {
+    //        aux = maxRec(raizRec.getDer());
+    //    } else {
+    //        aux = raizRec;
+    //    }
+    //    return aux;
+    //}
 }
