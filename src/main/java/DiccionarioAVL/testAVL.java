@@ -14,15 +14,6 @@ public class testAVL {
     public static void main(String[] args) {
         Diccionario prueba = new Diccionario();
 
-        //prueba.insertar(7,7 );
-        //prueba.insertar(10,10 );
-        //prueba.insertar(18,18);
-        //prueba.insertar(25,25);
-        //prueba.insertar(16,16);
-        //prueba.insertar(27,27);
-        //prueba.insertar(26,26);
-        //prueba.insertar(24,24);
-
         // prueba.insertar(90, 90);
         // prueba.insertar(19, 19);
         // prueba.insertar(33, 33);
@@ -70,15 +61,13 @@ public class testAVL {
         System.out.println("---------------------");
         System.out.println("A: "+ prueba.listarClaves().toString());
         System.out.println("---------------------");
-        System.out.println("B: "+ prueba.listarElementos().toString());
-        System.out.println("---------------------");
         System.out.println(prueba.toString());
         System.out.println("---------------------");
         //System.out.println("se elimina el nodo ");
-        //System.out.println(prueba.eliminar(27));
+        System.out.println(prueba.eliminar(33));
         System.out.println("---------------------");
-        //System.out.println(prueba.toString());
-        //System.out.println("B: "+ prueba.listarElementos().toString());
+        System.out.println(prueba.toString());
+
 
 
     }

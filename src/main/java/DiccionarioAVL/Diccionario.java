@@ -53,7 +53,23 @@ public class Diccionario {
     public boolean eliminar(Comparable clave) {
         boolean res = false;
         if (!this.esVacio()) {
-            res = elimRec(this.raiz,this.raiz,clave);
+            if (this.raiz.getClave().compareTo(clave)==0) { //si la raiz es el nodo a eliminar
+                if (this.raiz.esHoja()) {//caso 1: nodo es hoja
+                    this.raiz=null;
+                } else if (this.raiz.getIzq() == null) { //caso 2: nodo tiene solo hijo derecho
+                    this.raiz=this.raiz.getDer();
+                } else if (this.raiz.getDer() == null) { //caso 3: nodo tiene solo hijo izquierdo
+                    this.raiz=this.raiz.getIzq();
+                }else{ //caso 4: nodo tiene dos hijos
+                    NodoDiccionario nodoCandidato = encontrarMinimo(this.raiz.getDer()); //busco el candidato nimino por Derecha
+                    this.raiz.setElem(nodoCandidato.getElem());
+                    this.raiz.setClave(nodoCandidato.getClave());
+                    elimRec(this.raiz,this.raiz.getDer(),nodoCandidato.getClave()); //elimino el nodo candidato que aun esta en el fondo del arbol
+                    this.raiz.recalcularAltura(); //recalculo altura antes de rebalancear (creo que esta de mas)
+                    this.raiz.setDer(this.rebalancear(this.raiz.getDer())); // cunado vuelve del retono valancea
+                }
+            }
+            res = elimRec(null,this.raiz,clave);
             this.raiz = this.rebalancear(this.raiz);
         }
         return res;
@@ -100,19 +116,18 @@ public class Diccionario {
         if (nodo != null) {
             if (nodo.getClave().compareTo(clave) > 0) { //si nodo es MAYOR que elemento.getClave() voy por Izq
                 res = elimRec(nodo,nodo.getIzq(), clave);
-                nodoAnterior.setIzq(this.rebalancear(nodoAnterior.getIzq())); // cunado vuelve del retono valancea
+                nodo.setIzq(this.rebalancear(nodo.getIzq()));
             } else if (nodo.getClave().compareTo(clave) < 0) { //si nodo es MAYOR que elemento.getClave() voy por Der
                 res = elimRec(nodo,nodo.getDer(), clave);
-                nodoAnterior.setDer(this.rebalancear(nodoAnterior.getDer())); // cunado vuelve del retono valancea
+                nodo.setDer(this.rebalancear(nodo.getDer()));
             } else { //nodo es igual a clave
-                System.out.println("se encontro el nodo");               
+
                 if (nodo.esHoja()) {//caso 1: nodo es hoja
                     if (nodoAnterior.getDer().getClave().compareTo(clave)==0) {
                         nodoAnterior.setDer(null);
                     } else {
                         nodoAnterior.setIzq(null); 
                     }
-                    //nodo = null;
                 } else if (nodo.getIzq() == null) { //caso 2: nodo tiene solo hijo derecho
                     nodoAnterior.setDer(nodo.getDer());
                     nodo.setDer(null);
@@ -121,12 +136,9 @@ public class Diccionario {
                     nodo.setIzq(null);
                 } else { //caso 4: nodo tiene dos hijos
                     NodoDiccionario nodoCandidato = encontrarMinimo(nodo.getDer()); //busco el candidato nimino por Derecha
-                    System.out.println("nodo candidato: "+nodoCandidato.getElem());
                     nodo.setElem(nodoCandidato.getElem());
                     nodo.setClave(nodoCandidato.getClave());
-                    System.out.println(this.raiz.toString());
                     elimRec(nodo,nodo.getDer(), nodoCandidato.getClave()); //elimino el nodo candidato que aun esta en el fondo del arbol
-                    nodo.recalcularAltura(); //recalculo altura antes de rebalancear (creo que esta de mas)
                     nodo.setDer(this.rebalancear(nodo.getDer())); // cunado vuelve del retono valancea
                 }
                 res = true;
@@ -204,7 +216,7 @@ public class Diccionario {
     }
 
     private NodoDiccionario rotDobleIzq(NodoDiccionario raizRec) {
-        System.out.println("realiza rotacion Doble a Derecha con pivote: "+ raizRec.getClave());
+        System.out.println("realiza rotacion Doble a Izquierda con pivote: "+ raizRec.getClave());
         //Solo se puede aplicar si [raizRec] tiene un hijo derecho que tenga un hijo izquierdo
         raizRec.setDer(this.rotSimpleDer(raizRec.getDer()));
         raizRec = this.rotSimpleIzq(raizRec);
